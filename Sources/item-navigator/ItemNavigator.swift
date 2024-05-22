@@ -1,7 +1,7 @@
 import SwiftUI
 
 open class ItemNavigator<T: Identifiable> {
-  @ObservedObject var selection: Selection<T>
+  @ObservedObject public var selection: Selection<T>
 
   public init(selection: Selection<T>) {
     self.selection = selection
@@ -38,13 +38,13 @@ open class ItemNavigator<T: Identifiable> {
     return nextItem
   }
 
-  public func select(item: T, oldItem: T?) -> Bool {
+  open func select(item: T, oldItem: T?) -> Bool {
     false
   }
 
-  public func update(item: T, time: Double) {}
+  open func update(item: T, time: Double) {}
 
-  public func sameSelection(_ item1: T?, _ item2: T?) -> Bool {
+  open func sameSelection(_ item1: T?, _ item2: T?) -> Bool {
     item1 != nil && item2 != nil && item1!.id == item2!.id
   }
 }

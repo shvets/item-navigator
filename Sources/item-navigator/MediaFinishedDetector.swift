@@ -1,4 +1,5 @@
 import Foundation
+import AVFoundation
 
 open class MediaFinishedDetector {
   private var mediaFinished: () -> Void = {}
