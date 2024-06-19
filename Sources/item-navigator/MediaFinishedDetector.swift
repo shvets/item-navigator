@@ -1,7 +1,7 @@
 import Foundation
 import AVFoundation
 
-open class MediaFinishedDetector {
+class MediaFinishedDetector: ObservableObject {
   private var mediaFinished: () -> Void = {}
 
   public init() {
