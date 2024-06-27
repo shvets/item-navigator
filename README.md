@@ -4,6 +4,6 @@ Helps to navigate forward/backward between multiple items like sound tracks or e
 # Publishing
 
 ```bash
-git tag 1.0.4
+git tag 1.0.5
 git push --tags
 ```

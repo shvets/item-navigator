@@ -3,11 +3,9 @@ import SwiftUI
 open class ItemNavigator<T: Identifiable>: ObservableObject {
   @ObservedObject public var selection: Selection<T> = Selection()
 
-  public init(selection: Selection<T>? = nil) {
-    if let selection = selection {
-      self.selection = selection
-    }
-  }
+  public var onUpdate: (_ item: T, _ time: Double) -> Void = { _, _ in }
+
+  public init() {}
 
   open func next() -> T? {
     navigate(true)
@@ -43,11 +41,15 @@ open class ItemNavigator<T: Identifiable>: ObservableObject {
     return nextItem
   }
 
-  open func select(item: T, oldItem: T?) -> Bool {
-    false
+  public func select(_ item: T) {
+    selection.currentItem = item
   }
 
-  open func update(item: T, time: Double) {}
+  open func update(item: T, time: Double) {
+    select(item)
+
+    onUpdate(item, time)
+  }
 
   open func sameSelection(_ item1: T?, _ item2: T?) -> Bool {
     item1?.id == item2?.id
