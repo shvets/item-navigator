@@ -19,9 +19,7 @@ open class ItemNavigator<T: Identifiable>: ObservableObject {
     var nextItem: T? = nil
 
     if !selection.items.isEmpty {
-      let currentItem = selection.currentItem
-
-      if let index = selection.items.firstIndex(where: { sameSelection(currentItem, $0)} ) {
+      if let currentItem = selection.currentItem, let index = getPosition(currentItem) {
         if directNavigation {
           if index < selection.items.count-1 {
             nextItem = selection.items[index+1]
@@ -39,6 +37,10 @@ open class ItemNavigator<T: Identifiable>: ObservableObject {
     }
 
     return nextItem
+  }
+
+  private func getPosition(_ item: T) -> Int? {
+    selection.items.firstIndex(where: { sameSelection(item, $0)} )
   }
 
   public func select(_ item: T) {
