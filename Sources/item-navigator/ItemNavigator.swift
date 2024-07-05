@@ -1,9 +1,9 @@
 import SwiftUI
 
-open class ItemNavigator<T: Identifiable>: ObservableObject {
+open class ItemNavigator<T: Identifiable> {
   @ObservedObject public var selection: Selection<T> = Selection()
 
-  public var onUpdate: (_ item: T, _ time: Double) -> Void = { _, _ in }
+  public var onUpdate: (_ item: T) -> Void = { _ in }
 
   public init() {}
 
@@ -43,14 +43,16 @@ open class ItemNavigator<T: Identifiable>: ObservableObject {
     selection.items.firstIndex(where: { sameSelection(item, $0)} )
   }
 
-  public func select(_ item: T) {
+  public func selectItem(_ item: T) {
     selection.currentItem = item
   }
 
-  open func update(item: T, time: Double) {
-    select(item)
+  public func update(item: T) {
+    onUpdate(item)
+  }
 
-    onUpdate(item, time)
+  public func newSelection(_ item: T?) -> Bool {
+    return !sameSelection(item, selection.currentItem)
   }
 
   open func sameSelection(_ item1: T?, _ item2: T?) -> Bool {
