@@ -24,9 +24,9 @@ open class ItemNavigator<T: Identifiable> {
           if index < selection.items.count-1 {
             nextItem = selection.items[index+1]
           }
-          else {
-            nextItem = selection.items[0]
-          }
+          //else {
+            //nextItem = selection.items[0]
+          //}
         }
         else {
           if index > 0 {
